@@ -47,8 +47,19 @@ client.on("message", async (message) => {
   await message.reply("🤖 Ladentra AI sedang memproses...");
 
   try {
+    // 1. KITA LACAK ISI VARIABELNYA
+    console.log("🔍 Cek isi VITE_API_URL di server:", process.env.VITE_API_URL);
+
+    // 2. KITA HARDCODE SEMENTARA (Jalan Pintas)
+    // Jika process.env masih gagal, kita paksa pakai teks URL langsung agar bot bisa jalan
+    const targetUrl = process.env.VITE_API_URL 
+      ? `${process.env.VITE_API_URL}/api/wa-webhook` 
+      : "https://farmlytic-fix-production.up.railway.app/api/wa-webhook";
+      
+    console.log("🚀 Menembak ke URL:", targetUrl);
+
     const response = await axios.post(
-      `${process.env.VITE_API_URL}/api/wa-webhook`,
+      targetUrl,
       {
         sender: message.from,
         raw_text: teks,
