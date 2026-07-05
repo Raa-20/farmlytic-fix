@@ -1,7 +1,7 @@
 from backend.extensions import db
 
 class Admin(db.Model):
-    __tablename__ = 'ADMIN'
+    __tablename__ = 'admin'
 
     ID_ADMIN = db.Column(db.Integer, primary_key=True)
     NAMA = db.Column(db.String(255))

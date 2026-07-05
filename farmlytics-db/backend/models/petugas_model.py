@@ -1,7 +1,7 @@
 from backend.extensions import db
 
 class PetugasBangsal(db.Model):
-    __tablename__ = 'PETUGAS_BANGSAL'
+    __tablename__ = 'petugas_bangsal'
 
     ID_PETUGAS_BANGSAL = db.Column(db.Integer, primary_key=True)
     ID_LOKASI = db.Column(db.Integer)
