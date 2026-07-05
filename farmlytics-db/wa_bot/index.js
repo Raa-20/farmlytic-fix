@@ -37,7 +37,7 @@ client.on("message", async (message) => {
 
   try {
     const response = await axios.post(
-      "http://10.136.162.16:5000/api/wa-webhook",
+      "https://api-farmlytics.tifpsdku.com/api/wa-webhook",
       {
         sender: message.from,
         raw_text: teks,
