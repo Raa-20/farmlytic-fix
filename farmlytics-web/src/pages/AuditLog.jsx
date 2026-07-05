@@ -24,7 +24,7 @@ export default function AuditLog() {
 
   const getAuditLogs = async () => {
     try {
-      const res = await axios.get("http://10.136.162.16:5000/audit-log");
+      const res = await axios.get("https://api-farmlytics.tifpsdku.com/audit-log");
       setLogs(res.data);
     } catch (error) {
       console.error("Gagal mengambil audit log:", error);

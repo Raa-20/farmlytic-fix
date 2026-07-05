@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Pencil, Trash2, Plus, Search, Eye, EyeOff } from "lucide-react";
 
-const API_URL = "http://10.136.162.16:5000/api/users";
-const BASE_URL = "http://10.136.162.16:5000"; 
+const API_URL = "https://api-farmlytics.tifpsdku.com/api/users";
+const BASE_URL = "https://api-farmlytics.tifpsdku.com";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -18,7 +18,7 @@ export default function Users() {
     username: "",
     email: "",
     phone: "",
-    password: "", 
+    password: "",
     role: "",
     foto: "",
   });
@@ -41,8 +41,13 @@ export default function Users() {
   };
 
   const handleSave = async () => {
-    if (!isEdit && (!form.name || !form.username || !form.password || !form.role)) {
-      return alert("Nama, Username, Password, dan Role wajib diisi untuk user baru!");
+    if (
+      !isEdit &&
+      (!form.name || !form.username || !form.password || !form.role)
+    ) {
+      return alert(
+        "Nama, Username, Password, dan Role wajib diisi untuk user baru!",
+      );
     }
     if (isEdit && (!form.name || !form.username || !form.role)) {
       return alert("Nama, Username, dan Role wajib diisi!");
@@ -68,7 +73,7 @@ export default function Users() {
       username: user.username || "",
       email: user.email || "",
       phone: user.phone || "",
-      password: "", 
+      password: "",
       role: user.role || "",
       foto: user.foto || "",
     });
@@ -88,15 +93,25 @@ export default function Users() {
   };
 
   const resetForm = () => {
-    setForm({ id: null, name: "", username: "", email: "", phone: "", password: "", role: "", foto: "" });
+    setForm({
+      id: null,
+      name: "",
+      username: "",
+      email: "",
+      phone: "",
+      password: "",
+      role: "",
+      foto: "",
+    });
     setIsEdit(false);
     setShowModal(false);
   };
 
-  const filteredUsers = users.filter((u) =>
-    u.name?.toLowerCase().includes(search.toLowerCase()) ||
-    u.username?.toLowerCase().includes(search.toLowerCase()) ||
-    u.email?.toLowerCase().includes(search.toLowerCase())
+  const filteredUsers = users.filter(
+    (u) =>
+      u.name?.toLowerCase().includes(search.toLowerCase()) ||
+      u.username?.toLowerCase().includes(search.toLowerCase()) ||
+      u.email?.toLowerCase().includes(search.toLowerCase()),
   );
 
   const totalPages = Math.ceil(filteredUsers.length / dataPerPage);
@@ -108,12 +123,17 @@ export default function Users() {
       <div className="flex justify-between items-center mb-5">
         <div>
           <h1 className="text-xl font-bold text-gray-700">Manajemen User</h1>
-          <p className="text-sm text-gray-400">Kelola profil, email, foto, dan role pengguna</p>
+          <p className="text-sm text-gray-400">
+            Kelola profil, email, foto, dan role pengguna
+          </p>
         </div>
 
         <div className="flex items-center gap-3">
           <div className="relative">
-            <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+            <Search
+              className="absolute left-3 top-2.5 text-gray-400"
+              size={18}
+            />
             <input
               type="text"
               placeholder="Cari nama/username/email..."
@@ -123,7 +143,10 @@ export default function Users() {
             />
           </div>
 
-          <button onClick={() => setShowModal(true)} className="bg-[#8BC346] hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 shadow text-sm transition">
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-[#8BC346] hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 shadow text-sm transition"
+          >
             <Plus size={18} /> Tambah
           </button>
         </div>
@@ -148,57 +171,93 @@ export default function Users() {
           <tbody>
             {currentData.length === 0 ? (
               <tr>
-                <td colSpan="9" className="p-10 text-gray-500">Data pengguna tidak ditemukan.</td>
+                <td colSpan="9" className="p-10 text-gray-500">
+                  Data pengguna tidak ditemukan.
+                </td>
               </tr>
             ) : (
               currentData.map((u) => (
-                <tr key={`${u.role}-${u.id}`} className="border-b hover:bg-green-50 align-middle">
+                <tr
+                  key={`${u.role}-${u.id}`}
+                  className="border-b hover:bg-green-50 align-middle"
+                >
                   <td className="p-3 text-gray-500">USR-{u.id}</td>
-                  
+
                   <td>
                     {u.foto ? (
                       <img
                         src={`${BASE_URL}/uploads/${u.foto}`}
                         alt="Profile"
                         className="w-10 h-10 rounded-full object-cover mx-auto border border-gray-200 shadow-sm"
-                        onError={(e) => { e.target.onerror = null; e.target.style.display='none' }}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.style.display = "none";
+                        }}
                       />
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-gray-100 mx-auto flex items-center justify-center border border-gray-300">
-                        <span className="text-gray-400 text-[10px] font-semibold">No Pic</span>
+                        <span className="text-gray-400 text-[10px] font-semibold">
+                          No Pic
+                        </span>
                       </div>
                     )}
                   </td>
 
-                  <td className="truncate px-2 font-medium text-gray-800" title={u.name}>{u.name}</td>
-                  <td className="font-bold text-gray-600 truncate">{u.username}</td>
-                  <td className="truncate px-2 text-xs text-gray-500" title={u.email}>{u.email || "-"}</td>
+                  <td
+                    className="truncate px-2 font-medium text-gray-800"
+                    title={u.name}
+                  >
+                    {u.name}
+                  </td>
+                  <td className="font-bold text-gray-600 truncate">
+                    {u.username}
+                  </td>
+                  <td
+                    className="truncate px-2 text-xs text-gray-500"
+                    title={u.email}
+                  >
+                    {u.email || "-"}
+                  </td>
                   <td className="truncate text-gray-600">{u.phone || "-"}</td>
-                  
+
                   <td>
                     {showPassword ? (
-                      <span className="text-gray-600">{u.password ? "Ter-Hash" : "-"}</span>
+                      <span className="text-gray-600">
+                        {u.password ? "Ter-Hash" : "-"}
+                      </span>
                     ) : (
-                      <span className="text-gray-400 italic text-[11px]">Ter-enkripsi</span>
+                      <span className="text-gray-400 italic text-[11px]">
+                        Ter-enkripsi
+                      </span>
                     )}
                   </td>
 
                   <td>
-                    <span className={`px-2 py-1 rounded text-white text-xs font-semibold inline-block shadow-sm
+                    <span
+                      className={`px-2 py-1 rounded text-white text-xs font-semibold inline-block shadow-sm
                         ${u.role === "Admin" && "bg-gray-700"}
                         ${u.role === "Petugas" && "bg-green-500"}
                         ${u.role === "Supervisor" && "bg-blue-500"}
                         ${u.role === "Dinas" && "bg-purple-500"}
-                      `}>
+                      `}
+                    >
                       {u.role.toUpperCase()}
                     </span>
                   </td>
 
                   <td className="flex justify-center gap-2 p-2 mt-1.5">
-                    <button onClick={() => handleEdit(u)} className="bg-yellow-400 hover:bg-yellow-500 text-white p-1.5 rounded shadow-sm transition" title="Edit">
+                    <button
+                      onClick={() => handleEdit(u)}
+                      className="bg-yellow-400 hover:bg-yellow-500 text-white p-1.5 rounded shadow-sm transition"
+                      title="Edit"
+                    >
                       <Pencil size={15} />
                     </button>
-                    <button onClick={() => handleDelete(u.id, u.role)} className="bg-red-500 hover:bg-red-600 text-white p-1.5 rounded shadow-sm transition" title="Hapus">
+                    <button
+                      onClick={() => handleDelete(u.id, u.role)}
+                      className="bg-red-500 hover:bg-red-600 text-white p-1.5 rounded shadow-sm transition"
+                      title="Hapus"
+                    >
                       <Trash2 size={15} />
                     </button>
                   </td>
@@ -210,23 +269,44 @@ export default function Users() {
       </div>
 
       <div className="flex justify-between items-center mt-4">
-        <button onClick={() => setShowPassword(!showPassword)} className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-800 transition">
+        <button
+          onClick={() => setShowPassword(!showPassword)}
+          className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-800 transition"
+        >
           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-          {showPassword ? "Sembunyikan Status Password" : "Tampilkan Status Password"}
+          {showPassword
+            ? "Sembunyikan Status Password"
+            : "Tampilkan Status Password"}
         </button>
 
         <div className="flex text-sm gap-4 items-center">
-          <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)} className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 transition">Prev</button>
-          <span className="text-gray-600 font-medium py-1">Halaman {currentPage} dari {totalPages || 1}</span>
-          <button disabled={currentPage === totalPages || totalPages === 0} onClick={() => setCurrentPage(currentPage + 1)} className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 transition">Next</button>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 transition"
+          >
+            Prev
+          </button>
+          <span className="text-gray-600 font-medium py-1">
+            Halaman {currentPage} dari {totalPages || 1}
+          </span>
+          <button
+            disabled={currentPage === totalPages || totalPages === 0}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 transition"
+          >
+            Next
+          </button>
         </div>
       </div>
 
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-2xl w-[400px] shadow-2xl">
-            <h2 className="text-xl font-bold mb-5 text-gray-800 border-b pb-3">{isEdit ? "Edit Pengguna" : "Tambah Pengguna Baru"}</h2>
-            
+            <h2 className="text-xl font-bold mb-5 text-gray-800 border-b pb-3">
+              {isEdit ? "Edit Pengguna" : "Tambah Pengguna Baru"}
+            </h2>
+
             {isEdit && (
               <div className="flex flex-col items-center mb-5">
                 {form.foto ? (
@@ -234,54 +314,118 @@ export default function Users() {
                     src={`${BASE_URL}/uploads/${form.foto}`}
                     alt="Profile"
                     className="w-20 h-20 rounded-full object-cover border-4 border-gray-100 shadow-sm mb-2"
-                    onError={(e) => { e.target.onerror = null; e.target.style.display='none' }}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.style.display = "none";
+                    }}
                   />
                 ) : (
                   <div className="w-20 h-20 rounded-full bg-gray-100 flex flex-col items-center justify-center border-4 border-gray-50 shadow-sm mb-2">
-                    <span className="text-gray-400 text-xs font-semibold">No Pic</span>
+                    <span className="text-gray-400 text-xs font-semibold">
+                      No Pic
+                    </span>
                   </div>
                 )}
-                <span className="text-[10px] text-gray-400 italic font-medium">Foto dikelola via aplikasi Mobile</span>
+                <span className="text-[10px] text-gray-400 italic font-medium">
+                  Foto dikelola via aplikasi Mobile
+                </span>
               </div>
             )}
 
             <div className="space-y-3">
               <div>
-                <label className="text-xs font-bold text-gray-500 uppercase ml-1">Nama Lengkap</label>
-                <input placeholder="Masukkan nama..." value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] focus:ring-1 focus:ring-[#8BC346] text-sm mt-1" />
+                <label className="text-xs font-bold text-gray-500 uppercase ml-1">
+                  Nama Lengkap
+                </label>
+                <input
+                  placeholder="Masukkan nama..."
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] focus:ring-1 focus:ring-[#8BC346] text-sm mt-1"
+                />
               </div>
-              
+
               <div>
-                <label className="text-xs font-bold text-gray-500 uppercase ml-1">Username (Login)</label>
-                <input placeholder="Username unik" value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-none bg-gray-100 text-gray-500 cursor-not-allowed text-sm mt-1" disabled={isEdit} />
+                <label className="text-xs font-bold text-gray-500 uppercase ml-1">
+                  Username (Login)
+                </label>
+                <input
+                  placeholder="Username unik"
+                  value={form.username}
+                  onChange={(e) =>
+                    setForm({ ...form, username: e.target.value })
+                  }
+                  className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-none bg-gray-100 text-gray-500 cursor-not-allowed text-sm mt-1"
+                  disabled={isEdit}
+                />
               </div>
 
               <div className="flex gap-3">
                 <div className="w-1/2">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">Email</label>
-                  <input placeholder="email@..." type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] text-sm mt-1" />
+                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">
+                    Email
+                  </label>
+                  <input
+                    placeholder="email@..."
+                    type="email"
+                    value={form.email}
+                    onChange={(e) =>
+                      setForm({ ...form, email: e.target.value })
+                    }
+                    className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] text-sm mt-1"
+                  />
                 </div>
                 <div className="w-1/2">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">No. HP</label>
-                  <input placeholder="08..." type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] text-sm mt-1" />
+                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">
+                    No. HP
+                  </label>
+                  <input
+                    placeholder="08..."
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) =>
+                      setForm({ ...form, phone: e.target.value })
+                    }
+                    className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] text-sm mt-1"
+                  />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-gray-500 uppercase ml-1">Password</label>
-                <input type="password" placeholder={isEdit ? "Biarkan kosong jika tidak diubah" : "Password login"} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] text-sm mt-1" />
+                <label className="text-xs font-bold text-gray-500 uppercase ml-1">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  placeholder={
+                    isEdit
+                      ? "Biarkan kosong jika tidak diubah"
+                      : "Password login"
+                  }
+                  value={form.password}
+                  onChange={(e) =>
+                    setForm({ ...form, password: e.target.value })
+                  }
+                  className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] text-sm mt-1"
+                />
               </div>
-              
+
               <div>
-                <label className="text-xs font-bold text-gray-500 uppercase ml-1">Role Jabatan</label>
+                <label className="text-xs font-bold text-gray-500 uppercase ml-1">
+                  Role Jabatan
+                </label>
                 {isEdit ? (
-                  <input 
-                    value={form.role} 
-                    disabled 
-                    className="w-full border border-gray-300 p-2.5 rounded-lg bg-gray-100 text-gray-500 font-bold cursor-not-allowed text-sm mt-1" 
+                  <input
+                    value={form.role}
+                    disabled
+                    className="w-full border border-gray-300 p-2.5 rounded-lg bg-gray-100 text-gray-500 font-bold cursor-not-allowed text-sm mt-1"
                   />
                 ) : (
-                  <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] text-sm mt-1">
+                  <select
+                    value={form.role}
+                    onChange={(e) => setForm({ ...form, role: e.target.value })}
+                    className="w-full border border-gray-300 p-2.5 rounded-lg focus:outline-[#8BC346] text-sm mt-1"
+                  >
                     <option value="">-- Pilih Role --</option>
                     <option value="Admin">Admin</option>
                     <option value="Petugas">Petugas</option>
@@ -291,16 +435,27 @@ export default function Users() {
                 )}
               </div>
             </div>
-            
+
             {isEdit && (
               <p className="text-[11px] text-red-500 mt-3 font-medium bg-red-50 p-2 rounded-lg border border-red-100">
-                ⚠️ Role dan Username bersifat permanen. Untuk mengubahnya, hapus akun ini dan buat baru.
+                ⚠️ Role dan Username bersifat permanen. Untuk mengubahnya, hapus
+                akun ini dan buat baru.
               </p>
             )}
 
             <div className="flex justify-end gap-3 mt-6">
-              <button onClick={resetForm} className="bg-gray-100 hover:bg-gray-200 px-5 py-2.5 rounded-lg text-gray-700 font-bold transition">Batal</button>
-              <button onClick={handleSave} className="bg-[#8BC346] hover:bg-[#7ab13c] text-white px-6 py-2.5 rounded-lg font-bold shadow-md transition">Simpan Data</button>
+              <button
+                onClick={resetForm}
+                className="bg-gray-100 hover:bg-gray-200 px-5 py-2.5 rounded-lg text-gray-700 font-bold transition"
+              >
+                Batal
+              </button>
+              <button
+                onClick={handleSave}
+                className="bg-[#8BC346] hover:bg-[#7ab13c] text-white px-6 py-2.5 rounded-lg font-bold shadow-md transition"
+              >
+                Simpan Data
+              </button>
             </div>
           </div>
         </div>

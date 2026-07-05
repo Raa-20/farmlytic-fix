@@ -20,7 +20,7 @@ export default function Login({ setIsLogin }) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://10.136.162.16:5000/login", {
+      const response = await fetch("https://api-farmlytics.tifpsdku.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

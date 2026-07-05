@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Trash2, Search, Eye, X } from "lucide-react"; 
 
-const API_URL = "http://10.136.162.16:5000/history"; 
-const DELETE_URL = "http://10.136.162.16:5000/delete_data"; 
-const BASE_URL = "http://10.136.162.16:5000";
+const API_URL = "https://api-farmlytics.tifpsdku.com/history"; 
+const DELETE_URL = "https://api-farmlytics.tifpsdku.com/delete_data"; 
+const BASE_URL = "https://api-farmlytics.tifpsdku.com";
 
 export default function MasterData() {
   const [data, setData] = useState([]);

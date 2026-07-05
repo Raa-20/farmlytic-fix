@@ -32,9 +32,9 @@ ChartJS.register(
   Legend
 );
 
-const USERS_API = "http://10.136.162.16:5000/api/users";
-const HISTORY_API = "http://10.136.162.16:5000/history";
-const AUDIT_API = "http://10.136.162.16:5000/audit-log";
+const USERS_API = "https://api-farmlytics.tifpsdku.com/api/users";
+const HISTORY_API = "https://api-farmlytics.tifpsdku.com/history";
+const AUDIT_API = "https://api-farmlytics.tifpsdku.com/audit-log";
 
 export default function Dashboard({ setIsLogin }) {
   const navigate = useNavigate();
@@ -200,7 +200,7 @@ export default function Dashboard({ setIsLogin }) {
       const storedUser = localStorage.getItem("username") || "Unknown";
       const storedRole = localStorage.getItem("role") || "Unknown";
 
-      await axios.post("http://10.136.162.16:5000/logout", {
+      await axios.post("https://api-farmlytics.tifpsdku.com/logout", {
         username: storedUser,
         role: storedRole
       });
