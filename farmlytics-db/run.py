@@ -1,8 +1,11 @@
 import os
-from flask import send_from_directory 
+from flask import send_from_directory
 from backend import create_app
+from flask_cors import CORS # Import sudah benar
 
 app = create_app()
+CORS(app) # Tambahkan baris ini persis di bawah create_app()
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
 
