@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Pencil, Trash2, Plus, Search, Eye, EyeOff } from "lucide-react";
 
-const API_URL = 'https://${import.meta.env.VITE_API_URL}/api/users';
-const BASE_URL = 'https://${import.meta.env.VITE_API_URL}';
+const API_URL = "https://${import.meta.env.VITE_API_URL}/api/users";
+const BASE_URL = "https://${import.meta.env.VITE_API_URL}";
 
 export default function Users() {
   const [users, setUsers] = useState([]);

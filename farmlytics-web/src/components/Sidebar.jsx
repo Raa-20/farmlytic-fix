@@ -8,7 +8,7 @@ export default function Sidebar({ setMenu }) {
       const storedUser = localStorage.getItem("username") || "Unknown";
       const storedRole = localStorage.getItem("role") || "Unknown";
 
-      await axios.post('${import.meta.env.VITE_API_URL}/logout', {
+      await axios.post("${import.meta.env.VITE_API_URL}/logout", {
         username: storedUser,
         role: storedRole,
       });

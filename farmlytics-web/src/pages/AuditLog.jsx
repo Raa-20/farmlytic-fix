@@ -24,7 +24,7 @@ export default function AuditLog() {
 
   const getAuditLogs = async () => {
     try {
-      const res = await axios.get('${import.meta.env.VITE_API_URL}/audit-log');
+      const res = await axios.get("${import.meta.env.VITE_API_URL}/audit-log");
       setLogs(res.data);
     } catch (error) {
       console.error("Gagal mengambil audit log:", error);
