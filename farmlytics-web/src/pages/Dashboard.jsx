@@ -32,9 +32,9 @@ ChartJS.register(
   Legend
 );
 
-const USERS_API = "https://${import.meta.env.VITE_API_URL}/api/users";
-const HISTORY_API = "https://${import.meta.env.VITE_API_URL}/history";
-const AUDIT_API = "https://${import.meta.env.VITE_API_URL}/audit-log";
+const USERS_API = `${import.meta.env.VITE_API_URL}/api/users`;
+const HISTORY_API = `${import.meta.env.VITE_API_URL}/history`;
+const AUDIT_API = `${import.meta.env.VITE_API_URL}/audit-log`;
 
 export default function Dashboard({ setIsLogin }) {
   const navigate = useNavigate();

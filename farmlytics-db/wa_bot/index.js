@@ -37,7 +37,7 @@ client.on("message", async (message) => {
 
   try {
     const response = await axios.post(
-      "${import.meta.env.VITE_API_URL}/api/wa-webhook",
+      `${import.meta.env.VITE_API_URL}/api/wa-webhook`,
       {
         sender: message.from,
         raw_text: teks,

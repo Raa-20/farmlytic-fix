@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Trash2, Search, Eye, X } from "lucide-react"; 
 
-const API_URL = "https://${import.meta.env.VITE_API_URL}/history"; 
-const DELETE_URL = "https://${import.meta.env.VITE_API_URL}/delete_data"; 
-const BASE_URL = "https://${import.meta.env.VITE_API_URL}";
+const API_URL = `${import.meta.env.VITE_API_URL}/history`; 
+const DELETE_URL = `${import.meta.env.VITE_API_URL}/delete_data`; 
+const BASE_URL = `${import.meta.env.VITE_API_URL}`;
 
 export default function MasterData() {
   const [data, setData] = useState([]);
