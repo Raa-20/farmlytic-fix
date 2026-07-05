@@ -1,3 +1,13 @@
+import os
+
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:password123@db_mysql/farmlytics_db'
+    # Mengambil data dari variabel Railway, dengan nilai cadangan (fallback) untuk di laptop
+    DB_USER = os.getenv('MYSQLUSER', 'root')
+    DB_PASS = os.getenv('MYSQLPASSWORD', 'password123')
+    DB_HOST = os.getenv('MYSQLHOST', 'db_mysql')
+    DB_PORT = os.getenv('MYSQLPORT', '3306')
+    DB_NAME = os.getenv('MYSQLDATABASE', 'farmlytics_db')
+
+    # Merakit URL database sesuai dengan driver yang kamu pakai (mysqlconnector)
+    SQLALCHEMY_DATABASE_URI = f"mysql+mysqlconnector://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
