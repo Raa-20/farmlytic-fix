@@ -32,9 +32,9 @@ ChartJS.register(
   Legend
 );
 
-const USERS_API = "https://api-farmlytics.tifpsdku.com/api/users";
-const HISTORY_API = "https://api-farmlytics.tifpsdku.com/history";
-const AUDIT_API = "https://api-farmlytics.tifpsdku.com/audit-log";
+const USERS_API = "https://${import.meta.env.VITE_API_URL}/api/users";
+const HISTORY_API = "https://${import.meta.env.VITE_API_URL}/history";
+const AUDIT_API = "https://${import.meta.env.VITE_API_URL}/audit-log";
 
 export default function Dashboard({ setIsLogin }) {
   const navigate = useNavigate();
@@ -200,7 +200,7 @@ export default function Dashboard({ setIsLogin }) {
       const storedUser = localStorage.getItem("username") || "Unknown";
       const storedRole = localStorage.getItem("role") || "Unknown";
 
-      await axios.post("https://api-farmlytics.tifpsdku.com/logout", {
+      await axios.post("https://${import.meta.env.VITE_API_URL}/logout", {
         username: storedUser,
         role: storedRole
       });
