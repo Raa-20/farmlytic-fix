@@ -1,6 +1,8 @@
-const { Client, LocalAuth } = require("whatsapp-web.js");
-const qrcode = require("qrcode-terminal");
-const axios = require("axios");
+import pkg from 'whatsapp-web.js';
+const { Client, LocalAuth } = pkg;
+
+import qrcode from 'qrcode-terminal';
+import axios from 'axios';
 const client = new Client({
   authStrategy: new LocalAuth({ clientId: "LADENTRA_BOT" }),
   puppeteer: {
